@@ -1,0 +1,21 @@
+{
+  "name": "health-insurance-risk-calculator-nick",
+  "version": "1.0.0",
+  "description": "This template provides a starting point for your [Getting to Know Each Other Teams](https://www.lewisuniversity.org/activity/getting-to-know-each-other-teams) and\r [Health Insurance Risk Calculator for the Web As A Team](https://www.lewisuniversity.org/activity/health-risk-calculator-team-web).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicholasjones-stack/health-insurance-risk-calculator-nick.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/nicholasjones-stack/health-insurance-risk-calculator-nick/issues"
+  },
+  "homepage": "https://github.com/nicholasjones-stack/health-insurance-risk-calculator-nick#readme"
+}
