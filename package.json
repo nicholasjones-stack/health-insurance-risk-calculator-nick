@@ -4,7 +4,8 @@
   "description": "This template provides a starting point for your [Getting to Know Each Other Teams](https://www.lewisuniversity.org/activity/getting-to-know-each-other-teams) and\r [Health Insurance Risk Calculator for the Web As A Team](https://www.lewisuniversity.org/activity/health-risk-calculator-team-web).",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"no test\""
+    "test": "echo \"no test\"",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -17,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/nicholasjones-stack/health-insurance-risk-calculator-nick/issues"
   },
-  "homepage": "https://github.com/nicholasjones-stack/health-insurance-risk-calculator-nick#readme"
+  "homepage": "https://github.com/nicholasjones-stack/health-insurance-risk-calculator-nick#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
 }
