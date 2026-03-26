@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/nicholasjones-stack/health-insurance-risk-calculator-nick#readme",
   "dependencies": {
+    "cors": "^2.8.6",
     "express": "^5.2.1"
   }
 }
