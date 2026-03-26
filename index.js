@@ -7,8 +7,9 @@ var url = require('url');
 
 const port = process.env.PORT || 3000
 
-app.use(express.static(__dirname + '/static'))
 app.use(cors({ origin: '*' }))
+app.use(express.static(__dirname + '/static'))
+
 
 console.log("Hello world");
 
