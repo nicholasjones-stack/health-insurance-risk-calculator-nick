@@ -20,13 +20,75 @@ app.get('/test', (request, response) => {
 	response.send('This is the test response.')
 })
 
-// Risk calculation API
-app.post('/risk-category', (request, response) => {
+//blood pressure category API
+app.get('/calculate-bp', (request, response) => {
+    
+    console.log("calculate-bp called")
 
-    const age = parseInt(request.body.age)
-    const bmiCategory = request.body.bmiCategory
-    const bpCategory = request.body.bpCategory
-    const familyHistory = request.body.familyHistory || []
+    var inputs = url.parse(request.url, true).query
+    const systolic = parseInt(inputs.systolic)
+    const diastolic = parseInt(inputs.diastolic)
+
+    let category = ""
+    if (systolic == 5 || diastolic == 4)
+        category = "crisis"
+    else if (systolic == 4 || diastolic == 3)
+         category = "stage2"
+    else if (systolic == 3 || diastolic == 2)
+        category = "stage1"
+    else if (systolic == 2 && diastolic == 1)
+        category = "elevated"
+    else if (systolic == 1 && diastolic == 1)
+        category = "normal"
+
+    console.log("category: ", category)
+
+    response.send(category)
+})
+
+//bmi category API
+app.get('/calculate-bmi', (request, response) => {
+
+    console.log("calculate-bmi called")
+
+    var inputs = url.parse(request.url, true).query
+    const heightInches = parseInt(inputs.inches) + (parseInt(inputs.feet) * 12)
+    const weightPounds = parseInt(inputs.weight)
+    
+    console.log("inches", heightInches)
+    console.log("pounds", weightPounds)
+
+    const heightMeters = heightInches * 0.025
+    const weightKG = Math.round(weightPounds / 2.2046)
+    const bmi = (weightKG / (heightMeters**2)).toFixed(1)
+
+    console.log("meters", heightMeters)
+    console.log("weight", weightKG)
+
+    let bmiCategory = ""
+    if (bmi < 24.9)
+        bmiCategory = "normal"
+    else if (bmi < 29.9)
+        bmiCategory = "overweight"
+    else
+        bmiCategory = "obese"
+
+    console.log("bmi: ", bmi)
+    console.log("bmiCategory: ", bmiCategory)
+
+    response.send(bmiCategory)
+})
+
+// Risk calculation API
+app.get('/risk-category', (request, response) => {
+
+    console.log("Risk API called")
+
+    var inputs = url.parse(request.url, true).query
+    const age = parseInt(inputs.age)
+    const bmiCategory = parseInt(inputs.bmi)
+    const bpCategory = parseInt(inputs.bp)
+    const familyHistory = parseInt(inputs.disease)
 
     let score = 0
 
@@ -41,34 +103,23 @@ app.post('/risk-category', (request, response) => {
         score += 30
 
     // BMI points
-    if (bmiCategory === "overweight")
+    if (bmiCategory == 1)
         score += 30
-    else if (bmiCategory === "obese")
+    else if (bmiCategory == 2)
         score += 75
 
     // Blood pressure points
-    if (bpCategory === "elevated")
+    if (bpCategory === 1)
         score += 15
-    else if (bpCategory === "stage1")
+    else if (bpCategory === 2)
         score += 30
-    else if (bpCategory === "stage2")
+    else if (bpCategory === 3)
         score += 75
-    else if (bpCategory === "crisis")
+    else if (bpCategory === 4)
         score += 100
 
-    // Family history points
-    familyHistory.forEach(disease => {
-
-        if (disease === "diabetes")
-            score += 10
-
-        if (disease === "cancer")
-            score += 10
-
-        if (disease === "alzheimers")
-            score += 10
-
-    })
+    //Family history points
+    score += familyHistory *10
 
     // Determine risk category
     let riskCategory
@@ -82,14 +133,10 @@ app.post('/risk-category', (request, response) => {
     else
         riskCategory = "uninsurable"
 
-    console.log("Risk API called")
     console.log("Score:", score)
     console.log("Risk:", riskCategory)
 
-    response.json({
-        score: score,
-        riskCategory: riskCategory
-    })
+    response.send(riskCategory)
 
 })
 
