@@ -89,7 +89,6 @@ app.get('/risk-category', (request, response) => {
     const bmiCategory = parseInt(inputs.bmi)
     const bpCategory = parseInt(inputs.bp)
     const familyHistory = parseInt(inputs.disease)
-
     let score = 0
 
     // Age points
